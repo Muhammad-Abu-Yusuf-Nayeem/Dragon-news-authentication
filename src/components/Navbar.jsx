@@ -8,7 +8,7 @@ const Navbar = () => {
   return (
     <div className="flex justify-between items-center">
       <div className="">
-        <p>{user.name}</p>
+        <p>{user?.name}</p>
       </div>
       <div className="nav space-x-5">
         <Link to="/">Home</Link>
