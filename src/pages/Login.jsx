@@ -8,12 +8,11 @@ const Login = () => {
   const { userLogin, setUser } = useContext(AuthContext);
 
   const handleSubmit = (event) => {
-  
     event.preventDefault();
     const form = event.target;
     const email = form.email.value;
     const password = form.password.value;
-    console.log({ email, password });
+    // console.log({ email, password });
     userLogin(email, password)
       .then((result) => {
         const loggedUser = result.user;
@@ -24,7 +23,7 @@ const Login = () => {
       .catch((error) => {
         console.error("Login error:", error);
       });
-  }
+  };
   return (
     <div className="min-h-screen flex justify-center items-center ">
       <div className="card bg-base-100 lg:w-5/12  rounded-none p-10">
