@@ -9,7 +9,7 @@ const Login = () => {
   const [error, setError] = useState([]);
 
   const location = useLocation();
-  console.log("Private route location:", location);
+  // console.log("Private route location:", location);
 
   const navigate = useNavigate();
 
@@ -22,14 +22,14 @@ const Login = () => {
     userLogin(email, password)
       .then((result) => {
         const loggedUser = result.user;
-        console.log("Logged in user:", loggedUser);
+        // console.log("Logged in user:", loggedUser);
         setUser(loggedUser);
         navigate(location?.state ? location?.state : "/");
         form.reset();
       })
       .catch((err) => {
         setError({ login: err.code });
-        console.log("Login error:", err);
+        // console.log("Login error:", err);
       });
   };
   return (
@@ -56,6 +56,8 @@ const Login = () => {
                 type="password"
                 className="input w-full bg-slate-200"
                 placeholder="Password"
+                
+
               />
 
               {error?.login && (

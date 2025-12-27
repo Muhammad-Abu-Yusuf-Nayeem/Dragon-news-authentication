@@ -27,7 +27,7 @@ const Register = () => {
         password: "Password must be at least 6 characters long.",
       });
     }
-    console.log({ name, photo, email, password });
+    // console.log({ name, photo, email, password });
 
     createNewUser(email, password)
       .then((result) => {
@@ -38,12 +38,12 @@ const Register = () => {
             navigate("/");
           })
           .catch((err) => {
-            console.log("Profile update error:", err);
+            // console.log("Profile update error:", err);
           });
-        console.log(loggedUser);
+        // console.log(loggedUser);
       })
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
       });
   };
 
