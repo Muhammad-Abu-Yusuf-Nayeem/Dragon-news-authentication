@@ -1,25 +1,45 @@
 // import React from "react";
-import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../provider/AuthProvider";
 
 const Register = () => {
-  const { createNewUser,setUser} = useContext(AuthContext);
+  const { createNewUser, setUser, updateUserProfile } = useContext(AuthContext);
+  const [error, setError] = useState({});
+  const navigate = useNavigate();
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
     // Form data extraction
     const form = new FormData(e.target);
     const name = form.get("name");
+    if (name.length < 5) {
+      setError({ ...error, name: "Name must be at least 5 characters long." });
+      return;
+    }
     const photo = form.get("photo");
     const email = form.get("email");
     const password = form.get("password");
+    if (password.length < 6) {
+      setError({
+        ...error,
+        password: "Password must be at least 6 characters long.",
+      });
+    }
     console.log({ name, photo, email, password });
 
     createNewUser(email, password)
       .then((result) => {
         const loggedUser = result.user;
         setUser(loggedUser);
+        updateUserProfile({ displayName: name, photoURL: photo })
+          .then(() => {
+            navigate("/");
+          })
+          .catch((err) => {
+            console.log("Profile update error:", err);
+          });
         console.log(loggedUser);
       })
       .catch((error) => {
@@ -43,7 +63,11 @@ const Register = () => {
                 type="text"
                 className="input w-full bg-slate-200"
                 placeholder="Name"
+                onChange={() => setError({ ...error, name: "" })}
               />
+              {error?.name && (
+                <p className="text-red-600 mt-2 label test-xs">{error.name}</p>
+              )}
               {/* Photo input */}
               <label className="label">Photo</label>
               <input
@@ -67,7 +91,13 @@ const Register = () => {
                 type="password"
                 className="input w-full bg-slate-200"
                 placeholder="Password"
+                onChange={() => setError({ ...error, password: "" })}
               />
+              {error?.password && (
+                <p className="text-red-600 mt-2 label test-xs">
+                  {error.password}
+                </p>
+              )}
 
               <button className="btn btn-neutral mt-4 rounded-none w-full">
                 Register

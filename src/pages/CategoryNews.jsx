@@ -10,7 +10,7 @@ const CategoryNews = () => {
       <p className="text-gray-400 text-sm">
         {news.length} News Found On This Category
       </p>
-      <div>
+      <div className="space-y-4 mt-4">
         {news.map((singleNews) => (
           <NewsCard key={singleNews._id} news={singleNews}></NewsCard>
         ))}

@@ -7,7 +7,7 @@ import Navbar from "../components/Navbar";
 
 const HomeLayout = () => {
   return (
-    <div className="font-poppins">
+    <div className="font-poppins bg-gray-400">
       <header>
         <Header></Header>
         <section className="w-11/12 mx-auto ">
